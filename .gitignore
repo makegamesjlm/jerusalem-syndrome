@@ -23,6 +23,8 @@ ExportedObj/
 *.svd
 *.pdb
 *.opendb
+*.vscode
+*.collabignore
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -40,3 +42,4 @@ fmod_editor.log
 # Builds
 *.apk
 *.unitypackage
+
