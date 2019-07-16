@@ -40,3 +40,5 @@ fmod_editor.log
 # Builds
 *.apk
 *.unitypackage
+
+.idea/
