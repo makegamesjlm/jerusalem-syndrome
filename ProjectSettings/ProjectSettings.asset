@@ -614,7 +614,7 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
-    Collab: 1
+    Collab: 0
     UNet: 1
   luminIcon:
     m_Name: 
@@ -641,5 +641,5 @@ PlayerSettings:
   organizationId: parasect
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 1
-  disableOldInputManagerSupport: 0
+  disableOldInputManagerSupport: 1
   legacyClampBlendShapeWeights: 0
