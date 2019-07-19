@@ -28,13 +28,13 @@ public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
 
     private void Update()
     {
-        transform.position += new Vector3(horizontal * Time.deltaTime * speed, 0, vertical * Time.deltaTime * speed);
+        transform.position += new Vector3(horizontal * Time.deltaTime * speed, 0.0f, vertical * Time.deltaTime * speed);
     }
 
     public void OnMovement(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<Vector2>().x;
         vertical = context.ReadValue<Vector2>().y;
-        Debug.Log("pressed " + context.ReadValue<Vector2>());
+        Debug.Log("pressed " + context);
     }
 }
