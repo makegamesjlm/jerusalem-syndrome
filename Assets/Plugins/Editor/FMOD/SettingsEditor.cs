@@ -29,6 +29,15 @@ namespace FMODUnity
         bool[] foldoutState = new bool[(int)FMODPlatform.Count];
 
         bool hasBankSourceChanged = false;
+        string targetAssetPath;
+        bool focused = false;
+        
+        enum SourceType : uint
+        {
+            Project = 0,
+            Single,
+            Multi
+        }
 
         string PlatformLabel(FMODPlatform platform)
         {
@@ -388,13 +397,13 @@ namespace FMODUnity
 
             GUI.skin.FindStyle("HelpBox").richText = true;
 
-            int sourceType = settings.HasSourceProject ? 0 : (settings.HasPlatforms ? 2 : 1);
+            SourceType sourceType = settings.HasSourceProject ? SourceType.Project : (settings.HasPlatforms ? SourceType.Multi : SourceType.Single);
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.BeginVertical();
-            sourceType = GUILayout.Toggle(sourceType == 0, "Project", "Button") ? 0 : sourceType;
-            sourceType = GUILayout.Toggle(sourceType == 1, "Single Platform Build", "Button") ? 1 : sourceType;
-            sourceType = GUILayout.Toggle(sourceType == 2, "Multiple Platform Build", "Button") ? 2 : sourceType;
+            sourceType = GUILayout.Toggle(sourceType == SourceType.Project, "Project", "Button") ? 0 : sourceType;
+            sourceType = GUILayout.Toggle(sourceType == SourceType.Single, "Single Platform Build", "Button") ? SourceType.Single : sourceType;
+            sourceType = GUILayout.Toggle(sourceType == SourceType.Multi, "Multiple Platform Build", "Button") ? SourceType.Multi : sourceType;
             EditorGUILayout.EndVertical();
             EditorGUILayout.BeginVertical();
 
@@ -410,7 +419,7 @@ namespace FMODUnity
             EditorGUILayout.Space();
 
             
-            if (sourceType == 0)
+            if (sourceType == SourceType.Project)
             {
                 EditorGUILayout.BeginHorizontal();
                 string oldPath = settings.SourceProjectPathUnformatted;
@@ -451,7 +460,7 @@ namespace FMODUnity
                 }
             }
 
-            if (sourceType == 1 || sourceType == 2)
+            if (sourceType == SourceType.Single || sourceType == SourceType.Multi)
             {
                 EditorGUILayout.BeginHorizontal();
                 string oldPath = settings.SourceBankPathUnformatted;
@@ -477,7 +486,7 @@ namespace FMODUnity
                 }
                 EditorGUILayout.EndHorizontal();
 
-                settings.HasPlatforms = (sourceType == 2);
+                settings.HasPlatforms = (sourceType == SourceType.Multi);
                 settings.HasSourceProject = false;
 
                 // First time project path is set or changes, copy to streaming assets
@@ -488,10 +497,10 @@ namespace FMODUnity
             }
 
             if ((settings.HasSourceProject && !settings.SourceProjectPathUnformatted.Equals(settings.SourceProjectPath)) ||
-                    (sourceType >= 1 && !settings.SourceBankPathUnformatted.Equals(settings.SourceBankPath)))
+                    (sourceType >= SourceType.Single && !settings.SourceBankPathUnformatted.Equals(settings.SourceBankPath)))
             {
                 EditorGUI.BeginDisabledGroup(true);
-                EditorGUILayout.TextField("Platform specific path", sourceType >= 1 ? settings.SourceBankPath : settings.SourceProjectPath);
+                EditorGUILayout.TextField("Platform specific path", sourceType >= SourceType.Single ? settings.SourceBankPath : settings.SourceProjectPath);
                 EditorGUI.EndDisabledGroup();
             }
 
@@ -515,17 +524,42 @@ namespace FMODUnity
                 settings.ImportType = importType;
             }
 
-            EditorGUI.BeginDisabledGroup(settings.ImportType == ImportType.StreamingAssets);
-            string targetAssetPath = EditorGUILayout.TextField("FMOD Asset Folder", settings.TargetAssetPath);
-            if (targetAssetPath != settings.TargetAssetPath)
+            // ----- Text Assets -------------
+            EditorGUI.BeginDisabledGroup(settings.ImportType != ImportType.AssetBundle);
+            GUI.SetNextControlName("targetAssetPath");
+            targetAssetPath = EditorGUILayout.TextField("FMOD Asset Folder", string.IsNullOrEmpty(targetAssetPath) ? settings.TargetAssetPath : targetAssetPath);
+            if (GUI.GetNameOfFocusedControl() == "targetAssetPath")
+            {
+                focused = true;
+                if (Event.current.isKey)
+                {
+                    switch (Event.current.keyCode)
+                    {
+                        case KeyCode.Return:
+                        case KeyCode.KeypadEnter:
+                            settings.TargetAssetPath = targetAssetPath;
+                            hasBankTargetChanged = true;
+                            break;
+                    }
+                }
+            }
+            else if (focused)
             {
                 settings.TargetAssetPath = targetAssetPath;
                 hasBankTargetChanged = true;
+                focused = false;
             }
             EditorGUI.EndDisabledGroup();
-            EditorGUI.BeginDisabledGroup(settings.ImportType == ImportType.AssetBundle);
+
+            // ----- Logging -----------------
+            EditorGUILayout.Separator();
+            EditorGUILayout.LabelField("<b>Logging</b>", style);
+            EditorGUI.indentLevel++;
+            settings.LoggingLevel = (FMOD.DEBUG_FLAGS)EditorGUILayout.EnumPopup("Logging Level", settings.LoggingLevel);
+            EditorGUI.indentLevel--;
 
             // ----- Loading -----------------
+            EditorGUI.BeginDisabledGroup(settings.ImportType == ImportType.AssetBundle);
             EditorGUILayout.Separator();
             EditorGUILayout.LabelField("<b>Loading</b>", style);
             EditorGUI.indentLevel++;
@@ -543,10 +577,19 @@ namespace FMODUnity
             DisplayEditorBool("Live Update", settings.LiveUpdateSettings, FMODPlatform.PlayInEditor);
             if (settings.IsLiveUpdateEnabled(FMODPlatform.PlayInEditor))
             {
+                EditorGUILayout.BeginHorizontal();
+                settings.LiveUpdatePort = ushort.Parse(EditorGUILayout.TextField("Live Update Port:", settings.LiveUpdatePort.ToString()));
+                if (GUILayout.Button("Reset", GUILayout.ExpandWidth(false)))
+                {
+                    #if UNITY_5_0 || UNITY_5_1
+                    settings.LiveUpdatePort = 9265;
+                    #else
+                    settings.LiveUpdatePort = 9264;
+                    #endif
+                }
+                EditorGUILayout.EndHorizontal();
                 #if UNITY_5_0 || UNITY_5_1
-                EditorGUILayout.HelpBox("Unity 5.0 or 5.1 detected: Live update will listen on port <b>9265</b>", MessageType.Warning, false);
-                #else
-                EditorGUILayout.HelpBox("Live update will listen on port <b>9264</b>", MessageType.Info, false);
+                EditorGUILayout.HelpBox("Unity 5.0 or 5.1 detected: Live update will not be able to use port <b>9264</b>", MessageType.Warning, false);
                 #endif
             }
             DisplayEditorBool("Debug Overlay", settings.OverlaySettings, FMODPlatform.PlayInEditor);

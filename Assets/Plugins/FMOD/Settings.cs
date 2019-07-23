@@ -95,7 +95,7 @@ namespace FMODUnity
                     instance = Resources.Load(SettingsAssetName) as Settings;
                     if (instance == null)
                     {
-                        UnityEngine.Debug.Log("FMOD Studio: cannot find integration settings, creating default settings");
+                        UnityEngine.Debug.Log("[FMOD] Cannot find integration settings, creating default settings");
                         instance = CreateInstance<Settings>();
                         instance.name = "FMOD Studio Integration Settings";
 
@@ -186,6 +186,9 @@ namespace FMODUnity
         public string TargetAssetPath;
 
         [SerializeField]
+        public FMOD.DEBUG_FLAGS LoggingLevel = FMOD.DEBUG_FLAGS.WARNING;
+
+        [SerializeField]
         public List<PlatformIntSetting> SpeakerModeSettings;
 
         [SerializeField]
@@ -213,10 +216,13 @@ namespace FMODUnity
         public List<string> Plugins = new List<string>();
 
         [SerializeField]
-        public string MasterBank;
+        public List<string> MasterBanks;
 
         [SerializeField]
         public List<string> Banks;
+
+        [SerializeField]
+        public ushort LiveUpdatePort = 9264;
 
         public static FMODPlatform GetParent(FMODPlatform platform)
         {
@@ -364,6 +370,7 @@ namespace FMODUnity
 
         private Settings()
         {
+            MasterBanks = new List<string>();
             Banks = new List<string>();
             RealChannelSettings = new List<PlatformIntSetting>();
             VirtualChannelSettings = new List<PlatformIntSetting>();

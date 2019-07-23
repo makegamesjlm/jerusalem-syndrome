@@ -174,6 +174,7 @@ namespace FMODUnity
         {
             EditorApplication.update += Update;
             #if UNITY_2017_2_OR_NEWER
+            AssemblyReloadEvents.beforeAssemblyReload += HandleBeforeAssemblyReload;
             EditorApplication.playModeStateChanged += HandleOnPlayModeChanged;
             EditorApplication.pauseStateChanged += HandleOnPausedModeChanged;
             #else
@@ -182,6 +183,11 @@ namespace FMODUnity
         }
 
         #if UNITY_2017_2_OR_NEWER
+        static void HandleBeforeAssemblyReload()
+        {
+            DestroySystem();
+        }
+
         static void HandleOnPausedModeChanged(PauseState state)
         {
             if (RuntimeManager.IsInitialized && RuntimeManager.HasBanksLoaded)
@@ -224,6 +230,7 @@ namespace FMODUnity
 
         static void Update()
         {
+            #if !UNITY_2017_2_OR_NEWER
             // Compilation will cause scripts to reload, losing all state
             // This is the last chance to clean up FMOD and avoid a leak.
             if (EditorApplication.isCompiling)
@@ -231,6 +238,7 @@ namespace FMODUnity
                 DestroySystem();
                 RuntimeManager.Destroy();
             }
+            #endif
 
             // Update the editor system
             if (system.isValid())
@@ -378,10 +386,10 @@ namespace FMODUnity
             uint version;
             CheckResult(lowlevel.getVersion(out version));
 
-            EditorUtility.DisplayDialog("FMOD Studio Unity Integration", "Version: " + VerionNumberToString(version) + "\n\nCopyright \u00A9 Firelight Technologies Pty, Ltd. 2014-2018 \n\nSee LICENSE.TXT for additional license information.", "OK");
+            EditorUtility.DisplayDialog("FMOD Studio Unity Integration", "Version: " + VerionNumberToString(version) + "\n\nCopyright \u00A9 Firelight Technologies Pty, Ltd. 2014-2019 \n\nSee LICENSE.TXT for additional license information.", "OK");
         }
 
-        static FMOD.Studio.Bank masterBank;
+        static List<FMOD.Studio.Bank> masterBanks = new List<FMOD.Studio.Bank>();
         static FMOD.Studio.Bank previewBank;
         static FMOD.Studio.EventDescription previewEventDesc;
         static FMOD.Studio.EventInstance previewEventInstance;
@@ -411,8 +419,16 @@ namespace FMODUnity
 
             if (load)
             {
-                CheckResult(System.loadBankFile(EventManager.MasterBank.Path, FMOD.Studio.LOAD_BANK_FLAGS.NORMAL, out masterBank));
-                if (eventRef.Banks[0] != EventManager.MasterBank)
+                masterBanks.Clear();
+
+                foreach (EditorBankRef masterBankRef in EventManager.MasterBanks)
+                {
+                    FMOD.Studio.Bank masterBank;
+                    CheckResult(System.loadBankFile(masterBankRef.Path, FMOD.Studio.LOAD_BANK_FLAGS.NORMAL, out masterBank));
+                    masterBanks.Add(masterBank);
+                }
+
+                if (!EventManager.MasterBanks.Exists(x => eventRef.Banks.Contains(x)))
                 {
                     CheckResult(System.loadBankFile(eventRef.Banks[0].Path, FMOD.Studio.LOAD_BANK_FLAGS.NORMAL, out previewBank));
                 }
@@ -474,8 +490,7 @@ namespace FMODUnity
                 {
                     previewBank.unload();
                 }
-                masterBank.unload();
-                masterBank.clearHandle();
+                masterBanks.ForEach(x => { x.unload(); x.clearHandle(); });
                 previewBank.clearHandle();
                 previewState = PreviewState.Stopped;
             }

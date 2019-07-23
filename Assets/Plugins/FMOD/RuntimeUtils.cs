@@ -11,13 +11,13 @@ namespace FMODUnity
         public Guid Guid;
         public string Path;
         public EventNotFoundException(string path)
-            : base("FMOD Studio event not found '" + path + "'")
+            : base("[FMOD] Event not found '" + path + "'")
         {           
             Path = path;
         }
 
         public EventNotFoundException(Guid guid)
-            : base("FMOD Studio event not found " + guid.ToString("b") + "")
+            : base("[FMOD] Event not found " + guid.ToString("b") + "")
         {
             Guid = guid;
         }
@@ -27,7 +27,7 @@ namespace FMODUnity
     {
         public string Path;
         public BusNotFoundException(string path)
-            : base("FMOD Studio bus not found '" + path + "'")
+            : base("[FMOD] Bus not found '" + path + "'")
         {           
             Path = path;
         }
@@ -37,7 +37,7 @@ namespace FMODUnity
     {
         public string Path;
         public VCANotFoundException(string path)
-            : base("FMOD Studio VCA not found '" + path + "'")
+            : base("[FMOD] VCA not found '" + path + "'")
         {
             Path = path;
         }
@@ -49,13 +49,13 @@ namespace FMODUnity
         public FMOD.RESULT Result;
 
         public BankLoadException(string path, FMOD.RESULT result)
-            : base(String.Format("FMOD Studio could not load bank '{0}' : {1} : {2}", path, result.ToString(), FMOD.Error.String(result)))
+            : base(String.Format("[FMOD] Could not load bank '{0}' : {1} : {2}", path, result.ToString(), FMOD.Error.String(result)))
         {
             Path = path;
             Result = result;
         }
         public BankLoadException(string path, string error)
-            : base(String.Format("FMOD Studio could not load bank '{0}' : {1}", path, error))
+            : base(String.Format("[FMOD] Could not load bank '{0}' : {1}", path, error))
         {
             Path = path;
             Result = FMOD.RESULT.ERR_INTERNAL;
@@ -68,14 +68,14 @@ namespace FMODUnity
         public string Location;
 
         public SystemNotInitializedException(FMOD.RESULT result, string location)
-            : base(String.Format("FMOD Studio initialization failed : {2} : {0} : {1}", result.ToString(), FMOD.Error.String(result), location))
+            : base(String.Format("[FMOD] Initialization failed : {2} : {0} : {1}", result.ToString(), FMOD.Error.String(result), location))
         {
             Result = result;
             Location = location;
         }
 
         public SystemNotInitializedException(Exception inner)
-            : base("FMOD Studio initialization failed", inner)
+            : base("[FMOD] Initialization failed", inner)
         {
         }
     }
@@ -94,7 +94,11 @@ namespace FMODUnity
         CollisionEnter2D,
         CollisionExit2D,
         ObjectEnable,
-        ObjectDisable
+        ObjectDisable,
+        MouseEnter,
+        MouseExit,
+        MouseDown,
+        MouseUp,
     }
 
     public enum LoaderGameEvent
@@ -110,8 +114,6 @@ namespace FMODUnity
 
     public static class RuntimeUtils
     {
-        public const string LogFileName = "fmod.log";
-
         public static FMOD.VECTOR ToFMODVector(this Vector3 vec)
         {
             FMOD.VECTOR temp;
@@ -269,7 +271,7 @@ namespace FMODUnity
                 }
             }
             
-            UnityEngine.Debug.Log(String.Format("FMOD Studio: Device {0} classed as {1}", SystemInfo.deviceModel, result.ToString()));
+            UnityEngine.Debug.Log(String.Format("[FMOD] Device {0} classed as {1}", SystemInfo.deviceModel, result.ToString()));
             return result;
             #elif UNITY_WINRT_8_1
             FMODPlatform result;
@@ -282,7 +284,7 @@ namespace FMODUnity
                 result = FMODPlatform.MobileHigh;
             }
 
-            UnityEngine.Debug.Log(String.Format("FMOD Studio: Device {0} classed as {1}", SystemInfo.deviceModel, result.ToString()));
+            UnityEngine.Debug.Log(String.Format("[FMOD] Device {0} classed as {1}", SystemInfo.deviceModel, result.ToString()));
             return result;
 
             #elif UNITY_PS4
@@ -366,12 +368,8 @@ namespace FMODUnity
                 string pluginFolder = Application.dataPath + "/Plugins/";
             #elif UNITY_STANDALONE_LINUX
                 string pluginFolder = Application.dataPath + ((IntPtr.Size == 8) ? "/Plugins/x86_64/" : "/Plugins/x86/");
-            #elif UNITY_WSA
+            #elif UNITY_WSA || UNITY_ANDROID
                 string pluginFolder = "";
-            #elif UNITY_ANDROID
-                var dirInfo = new global::System.IO.DirectoryInfo(Application.persistentDataPath);
-                string packageName = dirInfo.Parent.Name;
-                string pluginFolder = "/data/data/" + packageName + "/lib/";
             #else
                 string pluginFileName = "";
                 string pluginFolder = "";
@@ -409,8 +407,10 @@ namespace FMODUnity
                     return FMODPlatform.iOS;
                 case BuildTarget.PS4:
                     return FMODPlatform.PS4;
+                #if (!UNITY_2018_3_OR_NEWER)
                 case BuildTarget.PSP2:
                     return FMODPlatform.PSVita;
+                #endif
                 case BuildTarget.StandaloneLinux:
                 case BuildTarget.StandaloneLinux64:
                 case BuildTarget.StandaloneLinuxUniversal:
