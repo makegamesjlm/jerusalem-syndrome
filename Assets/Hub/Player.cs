@@ -35,6 +35,5 @@ public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
     {
         horizontal = context.ReadValue<Vector2>().x;
         vertical = context.ReadValue<Vector2>().y;
-        Debug.Log("pressed " + context);
     }
 }
