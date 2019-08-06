@@ -29,6 +29,17 @@ public class PlayerHubInput : IInputActionCollection
                     ""processors"": """",
                     ""interactions"": """",
                     ""bindings"": []
+                },
+                {
+                    ""name"": ""Action1"",
+                    ""id"": ""7f92658f-a65a-4e68-a874-ab6c4bd62f63"",
+                    ""expectedControlLayout"": """",
+                    ""continuous"": false,
+                    ""passThrough"": false,
+                    ""initialStateCheck"": false,
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""bindings"": []
                 }
             ],
             ""bindings"": [
@@ -151,6 +162,18 @@ public class PlayerHubInput : IInputActionCollection
                     ""isComposite"": false,
                     ""isPartOfComposite"": true,
                     ""modifiers"": """"
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ccfcc85e-e2c4-4fa9-979c-3a88bfe8a73c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Action1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false,
+                    ""modifiers"": """"
                 }
             ]
         }
@@ -173,6 +196,7 @@ public class PlayerHubInput : IInputActionCollection
         // Player
         m_Player = asset.GetActionMap("Player");
         m_Player_Movement = m_Player.GetAction("Movement");
+        m_Player_Action1 = m_Player.GetAction("Action1");
     }
 
     ~PlayerHubInput()
@@ -226,11 +250,13 @@ public class PlayerHubInput : IInputActionCollection
     private InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private InputAction m_Player_Movement;
+    private InputAction m_Player_Action1;
     public struct PlayerActions
     {
         private PlayerHubInput m_Wrapper;
         public PlayerActions(PlayerHubInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement { get { return m_Wrapper.m_Player_Movement; } }
+        public InputAction @Action1 { get { return m_Wrapper.m_Player_Action1; } }
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -244,6 +270,9 @@ public class PlayerHubInput : IInputActionCollection
                 Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                Action1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAction1;
+                Action1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAction1;
+                Action1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAction1;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -251,6 +280,9 @@ public class PlayerHubInput : IInputActionCollection
                 Movement.started += instance.OnMovement;
                 Movement.performed += instance.OnMovement;
                 Movement.canceled += instance.OnMovement;
+                Action1.started += instance.OnAction1;
+                Action1.performed += instance.OnAction1;
+                Action1.canceled += instance.OnAction1;
             }
         }
     }
@@ -273,5 +305,6 @@ public class PlayerHubInput : IInputActionCollection
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnAction1(InputAction.CallbackContext context);
     }
 }

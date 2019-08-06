@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
 {
@@ -19,11 +20,13 @@ public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
     private void OnEnable()
     {
         controls.Player.Movement.Enable();
+        controls.Player.Action1.Enable();
     }
 
     private void OnDisable()
     {
         controls.Player.Movement.Disable();
+        controls.Player.Action1.Disable();
     }
 
     private void Update()
@@ -36,5 +39,15 @@ public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
     {
         horizontal = context.ReadValue<Vector2>().x;
         vertical = context.ReadValue<Vector2>().y;
+    }
+
+    public void OnAction1(InputAction.CallbackContext context)
+    {
+        if (EnterScene1.shouldEnterScene) {
+            SceneManager.LoadScene("Game1", LoadSceneMode.Single);
+        }
+        if (EnterScene2.shouldEnterScene) {
+            SceneManager.LoadScene("Game2", LoadSceneMode.Single);
+        }
     }
 }

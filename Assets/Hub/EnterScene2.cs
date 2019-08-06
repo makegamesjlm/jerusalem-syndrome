@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnterScene1 : MonoBehaviour
+public class EnterScene2 : MonoBehaviour
 {
     public static bool shouldEnterScene = false;
     void OnTriggerEnter(Collider other)
