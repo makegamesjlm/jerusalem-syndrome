@@ -29,6 +29,7 @@ public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
     private void Update()
     {
         transform.position += new Vector3(horizontal * Time.deltaTime * speed, 0.0f, vertical * Time.deltaTime * speed);
+        this.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 
     public void OnMovement(InputAction.CallbackContext context)
