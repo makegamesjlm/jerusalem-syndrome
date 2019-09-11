@@ -177,7 +177,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: SCENE1
+  m_text: Faloopi
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 266655076}
-    characterCount: 6
+    characterCount: 7
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -975,8 +975,9 @@ MonoBehaviour:
     type: 3}
   m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ca9f5fa95ffab41fb9a615ab714db018,
     type: 3}
-  m_Touches: []
-  m_TrackedDevices: []
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
+  m_TrackedDeviceSelectAction: {fileID: 0}
 --- !u!114 &1342202182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,7 +1041,7 @@ GameObject:
   - component: {fileID: 1772885120}
   - component: {fileID: 1772885121}
   m_Layer: 0
-  m_Name: Scene1Entrance
+  m_Name: FaloopiGameEntrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1157,7 +1158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1772885115}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6653bdf842fe6e84fa08b16fce76a2cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 51c1182b277bebb4287203e67d59d1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &1772885121
