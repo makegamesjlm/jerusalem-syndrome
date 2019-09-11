@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurbineRotation : MonoBehaviour
 {
-    [SerializeField] public float y_speed = 5f;
+    [SerializeField] public float y_speed = 2f;
     // Update is called once per frame
     void Update()
     {
