@@ -43,8 +43,8 @@ public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
 
     public void OnAction1(InputAction.CallbackContext context)
     {
-        if (EnterScene1.shouldEnterScene) {
-            SceneManager.LoadScene("Game1", LoadSceneMode.Single);
+        if (EnterFaloopiGame.shouldEnterScene) {
+            SceneManager.LoadScene("Start_Faloopi", LoadSceneMode.Single);
         }
         if (EnterScene2.shouldEnterScene) {
             SceneManager.LoadScene("Game2", LoadSceneMode.Single);
