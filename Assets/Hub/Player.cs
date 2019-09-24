@@ -9,8 +9,8 @@ public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
     [SerializeField] private PlayerHubInput controls;
     [SerializeField] private float speed = 3f;
 
-    private float horizontal;
-    private float vertical;
+    [SerializeField] private float horizontal;
+    [SerializeField] private float vertical;
     void Awake()
     {
         controls = new PlayerHubInput();
