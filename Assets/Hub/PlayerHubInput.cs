@@ -1,9 +1,7 @@
 // GENERATED AUTOMATICALLY FROM 'Assets/Hub/PlayerHubInput.inputactions'
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
@@ -21,25 +19,19 @@ public class PlayerHubInput : IInputActionCollection
             ""actions"": [
                 {
                     ""name"": ""Movement"",
+                    ""type"": ""Value"",
                     ""id"": ""58612491-dd6c-4faa-8d0e-696e35a59f41"",
-                    ""expectedControlLayout"": ""Vector2"",
-                    ""continuous"": false,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""bindings"": []
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Action1"",
+                    ""type"": ""Value"",
                     ""id"": ""7f92658f-a65a-4e68-a874-ab6c4bd62f63"",
-                    ""expectedControlLayout"": """",
-                    ""continuous"": false,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
+                    ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""bindings"": []
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -52,8 +44,7 @@ public class PlayerHubInput : IInputActionCollection
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""up"",
@@ -64,8 +55,7 @@ public class PlayerHubInput : IInputActionCollection
                     ""groups"": "";Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
@@ -76,8 +66,7 @@ public class PlayerHubInput : IInputActionCollection
                     ""groups"": "";Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
@@ -88,8 +77,7 @@ public class PlayerHubInput : IInputActionCollection
                     ""groups"": "";Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
@@ -100,8 +88,7 @@ public class PlayerHubInput : IInputActionCollection
                     ""groups"": "";Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""arrowkeys"",
@@ -112,8 +99,7 @@ public class PlayerHubInput : IInputActionCollection
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""up"",
@@ -124,8 +110,7 @@ public class PlayerHubInput : IInputActionCollection
                     ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
@@ -136,8 +121,7 @@ public class PlayerHubInput : IInputActionCollection
                     ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
@@ -148,8 +132,7 @@ public class PlayerHubInput : IInputActionCollection
                     ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
@@ -160,8 +143,7 @@ public class PlayerHubInput : IInputActionCollection
                     ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -172,8 +154,7 @@ public class PlayerHubInput : IInputActionCollection
                     ""groups"": "";Keyboard"",
                     ""action"": ""Action1"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -184,8 +165,7 @@ public class PlayerHubInput : IInputActionCollection
                     ""groups"": """",
                     ""action"": ""Action1"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -193,7 +173,6 @@ public class PlayerHubInput : IInputActionCollection
     ""controlSchemes"": [
         {
             ""name"": ""Keyboard"",
-            ""basedOn"": """",
             ""bindingGroup"": ""Keyboard"",
             ""devices"": [
                 {
@@ -228,10 +207,7 @@ public class PlayerHubInput : IInputActionCollection
         set => asset.devices = value;
     }
 
-    public ReadOnlyArray<InputControlScheme> controlSchemes
-    {
-        get => asset.controlSchemes;
-    }
+    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
 
     public bool Contains(InputAction action)
     {
@@ -259,21 +235,20 @@ public class PlayerHubInput : IInputActionCollection
     }
 
     // Player
-    private InputActionMap m_Player;
+    private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
-    private InputAction m_Player_Movement;
-    private InputAction m_Player_Action1;
+    private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_Action1;
     public struct PlayerActions
     {
         private PlayerHubInput m_Wrapper;
         public PlayerActions(PlayerHubInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement { get { return m_Wrapper.m_Player_Movement; } }
-        public InputAction @Action1 { get { return m_Wrapper.m_Player_Action1; } }
+        public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @Action1 => m_Wrapper.m_Player_Action1;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled { get { return Get().enabled; } }
-        public InputActionMap Clone() { return Get().Clone(); }
+        public bool enabled => Get().enabled;
         public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
         public void SetCallbacks(IPlayerActions instance)
         {
@@ -298,13 +273,7 @@ public class PlayerHubInput : IInputActionCollection
             }
         }
     }
-    public PlayerActions @Player
-    {
-        get
-        {
-            return new PlayerActions(this);
-        }
-    }
+    public PlayerActions @Player => new PlayerActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
