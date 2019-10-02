@@ -170,8 +170,9 @@ MonoBehaviour:
     type: 3}
   m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ca9f5fa95ffab41fb9a615ab714db018,
     type: 3}
-  m_Touches: []
-  m_TrackedDevices: []
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
+  m_TrackedDeviceSelectAction: {fileID: 0}
 --- !u!114 &64491025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,7 +830,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 2594017547257690433, guid: 71ac09bc3863b614fbe149286f8dcebf,
+  m_Sprite: {fileID: 4935251902282014160, guid: 71ac09bc3863b614fbe149286f8dcebf,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0

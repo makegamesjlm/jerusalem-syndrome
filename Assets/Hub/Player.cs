@@ -17,7 +17,9 @@ public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
     private PlayerLevelManager playerLevelManager;
     void Awake()
     {
+        Debug.Log(controls);
         controls = new PlayerHubInput();
+        Debug.Log(controls);
         controls.Player.SetCallbacks(this);
         playerLevelManager = new PlayerLevelManager(levelScale);
     }
@@ -36,6 +38,7 @@ public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
 
     private void Update()
     {
+        Debug.Log(Time.deltaTime);
         transform.position += new Vector3(horizontal * Time.deltaTime * speed, 0.0f, vertical * Time.deltaTime * speed);
         this.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
@@ -49,9 +52,11 @@ public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
     public void OnAction1(InputAction.CallbackContext context)
     {
         if (EnterFaloopiGame.shouldEnterScene) {
+            EnterFaloopiGame.shouldEnterScene = false;
             SceneManager.LoadScene("Faloopi_Game", LoadSceneMode.Single);
         }
         if (EnterScene2.shouldEnterScene) {
+            EnterScene2.shouldEnterScene = false;
             SceneManager.LoadScene("Game2", LoadSceneMode.Single);
         }
     }

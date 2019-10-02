@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: -2982177348560149322
     second: "\u05DC\u05D5\u05D2\u05D5-\u05D2\u05D9\u05D9\u05DD\u05D0\u05D5\u05D1\u05E8-\u05DB\u05E4\u05EA\u05D5\u05E8_3"
+  - first:
+      213: 8505782084699824470
+    second: Canvas_Art_0
+  - first:
+      213: 4935251902282014160
+    second: Canvas_Art_1
+  - first:
+      213: 5515342250378000987
+    second: Canvas_Art_2
+  - first:
+      213: 5051617519357969152
+    second: Canvas_Art_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -96,11 +108,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u05DC\u05D5\u05D2\u05D5-\u05D2\u05D9\u05D9\u05DD\u05D0\u05D5\u05D1\u05E8-\u05DB\u05E4\u05EA\u05D5\u05E8_0"
+      name: Canvas_Art_0
       rect:
         serializedVersion: 2
         x: 93
-        y: 433
+        y: 591
         width: 386
         height: 176
       alignment: 0
@@ -110,18 +122,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2b7bf8a3dda2404e9d4e0b8382ed3ae
-      internalID: -6824822338585776883
+      spriteID: 9e03747428ea2a84d8705e9852a9d957
+      internalID: 8505782084699824470
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u05DC\u05D5\u05D2\u05D5-\u05D2\u05D9\u05D9\u05DD\u05D0\u05D5\u05D1\u05E8-\u05DB\u05E4\u05EA\u05D5\u05E8_1"
+      name: Canvas_Art_1
       rect:
         serializedVersion: 2
         x: 208
-        y: 280
+        y: 438
         width: 136
         height: 79
       alignment: 0
@@ -131,19 +143,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3adcba9be978faf46827723a9471f82d
-      internalID: 2594017547257690433
+      spriteID: dc2ef77d0a5d2814d9457fc462863690
+      internalID: 4935251902282014160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u05DC\u05D5\u05D2\u05D5-\u05D2\u05D9\u05D9\u05DD\u05D0\u05D5\u05D1\u05E8-\u05DB\u05E4\u05EA\u05D5\u05E8_2"
+      name: Canvas_Art_2
       rect:
         serializedVersion: 2
-        x: 12
-        y: 89
-        width: 342
+        x: 3
+        y: 245
+        width: 537
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -152,20 +164,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8667b17aaa5dd148af4b6f2a9bd8bec
-      internalID: -6947941662700760531
+      spriteID: 98ad8a61fef97eb44934b6c1183576db
+      internalID: 5515342250378000987
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u05DC\u05D5\u05D2\u05D5-\u05D2\u05D9\u05D9\u05DD\u05D0\u05D5\u05D1\u05E8-\u05DB\u05E4\u05EA\u05D5\u05E8_3"
+      name: Canvas_Art_4
       rect:
         serializedVersion: 2
-        x: 366
-        y: 89
-        width: 174
-        height: 102
+        x: 216
+        y: 78
+        width: 136
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,8 +185,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffcff842d80999844bc62bd4c8e99fea
-      internalID: -2982177348560149322
+      spriteID: 998e713621da6b047a7ea68718e69cc8
+      internalID: 5051617519357969152
       vertices: []
       indices: 
       edges: []

@@ -28,4 +28,10 @@ public class GameMana : MonoBehaviour
         btnbtnfx.Play();
         SceneManager.LoadScene(4);
     }
+
+    public void exitToHub()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Hub");
+    }
 }
