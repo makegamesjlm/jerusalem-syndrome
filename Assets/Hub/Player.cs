@@ -12,7 +12,7 @@ public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
     [SerializeField] private float horizontal;
     [SerializeField] private float vertical;
 
-    [SerializeField] private int playerLevel; //Player will have a level, experience will be gained
+    [SerializeField] private int playerLevel; //Player will have a level, experience will be gained from minigames
     private PlayerLevelManager playerLevelManager;
     void Awake()
     {
