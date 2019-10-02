@@ -11,7 +11,7 @@ public class ItamarsPlayerController : MonoBehaviour
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * speed);
+        rb.AddForce(transform.up * speed);
     }
 
     // Update is called once per frame
