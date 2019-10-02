@@ -19,7 +19,6 @@ public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
         controls = new PlayerHubInput();
         controls.Player.SetCallbacks(this);
         playerLevelManager = new PlayerLevelManager(levelScale);
-        Debug.Log(levelScale);
     }
 
     private void OnEnable()
