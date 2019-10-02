@@ -6,15 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, PlayerHubInput.IPlayerActions
 {
+    [SerializeField] public static int levelScale = 100;
     [SerializeField] private PlayerHubInput controls;
     [SerializeField] private float speed = 3f;
-
     [SerializeField] private float horizontal;
     [SerializeField] private float vertical;
+
+    [SerializeField] private int playerLevel; //Player will have a level, experience will be gained
+    private PlayerLevelManager playerLevelManager;
     void Awake()
     {
         controls = new PlayerHubInput();
         controls.Player.SetCallbacks(this);
+        playerLevelManager = new PlayerLevelManager(levelScale);
+        Debug.Log(levelScale);
     }
 
     private void OnEnable()
