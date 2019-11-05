@@ -1,2 +1,2 @@
 # untitled-community-game
-An open game for members of the GameDevJLM community to work on.
+An open game for members of the MakeGamesJLM community to work on.
